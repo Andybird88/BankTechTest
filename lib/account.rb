@@ -19,6 +19,7 @@ def deposit(amount)
 end
 
 def withdraw(amount)
+    raise "Insufficent funds" unless @balance > amount
     decrement_balance(amount)
     debit = format_credit(amount)
     log(debit)
