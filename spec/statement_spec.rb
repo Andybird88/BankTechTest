@@ -5,4 +5,6 @@ describe Statement do
         test_statement = Statement.new
         expect(test_statement.title).to eq('date || credit || debit || balance')
     end
+
+    
 end
