@@ -1,4 +1,5 @@
 require './lib/statement'
+require './lib/transaction'
 
 class Account
 
@@ -13,12 +14,18 @@ end
 
 def deposit(amount)
     increment_balance(amount)
-    format_debit(amount)
+    credit = format_debit(amount)
+    log(credit)
 end
 
 def withdraw(amount)
     decrement_balance(amount)
-    format_credit(amount)
+    debit = format_credit(amount)
+    log(debit)
+end
+
+def account_statement
+    @statement.print(@transactions)
 end
 
 private
@@ -31,12 +38,6 @@ def format_debit(amount)
     @transaction.new(amount, 0, @balance)
 end
 
-def format_debit(amount)
-
-end
-
-
-
 def increment_balance(amount)
     @balance += amount
 end
@@ -45,5 +46,8 @@ def decrement_balance(amount)
     @balance -= amount
 end
 
+def log(transaction)
+    @transactions << transaction
+end
 
 end
