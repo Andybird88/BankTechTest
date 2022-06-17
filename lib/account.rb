@@ -1,54 +1,54 @@
+# frozen_string_literal: true
+
 require './lib/statement'
 require './lib/transaction'
+# Account class
+class Account 
+  attr_reader :balance, :statement, :transactions
 
-class Account
-
-    attr_reader :balance, :statement, :transactions
-
-def initialize(statement = Statement.new, transaction = Transaction)
+  def initialize(statement = Statement.new, transaction = Transaction)
     @transactions = []
     @transaction = transaction
     @statement = statement
     @balance = 0
-end
+  end
 
-def deposit(amount)
+  def deposit(amount)
     increment_balance(amount)
     credit = format_debit(amount)
     log(credit)
-end
+  end
 
-def withdraw(amount)
-    raise "Insufficent funds" unless @balance > amount
+  def withdraw(amount)
+    raise 'Insufficent funds' unless @balance > amount
     decrement_balance(amount)
     debit = format_credit(amount)
     log(debit)
-end
+  end
 
-def account_statement
+  def account_statement
     @statement.print(@transactions)
-end
+  end
 
-private
+  private
 
-def format_credit(amount)
+  def format_credit(amount)
     @transaction.new(0, amount, @balance)
-end
+  end
 
-def format_debit(amount)
+  def format_debit(amount)
     @transaction.new(amount, 0, @balance)
-end
+  end
 
-def increment_balance(amount)
+  def increment_balance(amount)
     @balance += amount
-end
+  end
 
-def decrement_balance(amount)
+  def decrement_balance(amount)
     @balance -= amount
-end
+  end
 
-def log(transaction)
+  def log(transaction)
     @transactions << transaction
-end
-
+  end
 end
