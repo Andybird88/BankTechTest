@@ -46,7 +46,7 @@ require './lib/account'
 'your_account_name'.deposit( amount )
 ```
 - The amount is how much you want to deposit
-- The date is the date that you made the transaction
+
 5. Withdraw funds from you account: 
 ```
 'your_account_name'.withdraw( amount )
